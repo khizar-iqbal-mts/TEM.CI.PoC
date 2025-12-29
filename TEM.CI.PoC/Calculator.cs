@@ -29,6 +29,14 @@ namespace TEM.CI.PoC
 			return a - b;
 		}
 
+		/// <summary>
+		/// Multiplies two numbers
+		/// </summary>
+		public int Multiply(int a, int b)
+		{
+			return a * b;
+		}
+
 		// Unused parameter - will generate warning
 		public int GetValue(int unusedParameter)
 		{

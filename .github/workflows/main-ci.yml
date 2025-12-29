@@ -1,0 +1,88 @@
+name: Main Branch CI
+
+on:
+  push:
+    # push to main branch do we need to push to main branch?
+    # branches:
+    #   - master
+  pull_request:
+    branches:
+      - master
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+      
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.x'
+        
+    - name: Restore NuGet packages
+      run: nuget restore TEM.CI.PoC.sln
+      
+    - name: Build solution
+      run: msbuild TEM.CI.PoC.sln /p:Configuration=Release /p:Platform="Any CPU" /t:Build /v:minimal
+      
+    - name: Run unit tests
+      shell: pwsh
+      run: |
+        dotnet test TEM.CI.PoC.Tests/bin/Release/TEM.CI.PoC.Tests.dll --logger "console;verbosity=normal"
+      continue-on-error: true
+      
+    - name: Code Analysis
+      shell: pwsh
+      run: |
+        Write-Host "Running code analysis..." -ForegroundColor Cyan
+        Write-Host "========================================" -ForegroundColor Cyan
+        Write-Host ""
+        
+        # Build with detailed output to capture warnings and errors
+        $buildOutput = msbuild TEM.CI.PoC.sln /p:Configuration=Release /p:Platform="Any CPU" /t:Rebuild /v:normal 2>&1
+        
+        # Extract and display code analysis issues
+        # Match actual warnings/errors: path(line,col): warning/error CS####: message
+        # Exclude compiler command lines (long lines with /reference, /noconfig, etc.)
+        $issues = $buildOutput | Where-Object { 
+          $_ -match "\(\d+,\d+\):\s*(warning|error)\s+CS\d+:" -and
+          $_ -notmatch "^E:\\Program Files" -and
+          $_ -notmatch "/noconfig" -and
+          $_ -notmatch "/reference:" -and
+          $_.Length -lt 500  # Exclude very long compiler command lines
+        }
+        
+        if ($issues) {
+          Write-Host ""
+          Write-Host "Code Analysis Results:" -ForegroundColor Yellow
+          Write-Host "========================================" -ForegroundColor Cyan
+          $errorCount = 0
+          $warningCount = 0
+          $issues | ForEach-Object {
+            if ($_ -match "\(\d+,\d+\):\s*error\s+CS\d+:") {
+              Write-Host $_ -ForegroundColor Red
+              $errorCount++
+            } elseif ($_ -match "\(\d+,\d+\):\s*warning\s+CS\d+:") {
+              Write-Host $_ -ForegroundColor Yellow
+              $warningCount++
+            }
+          }
+          Write-Host "========================================" -ForegroundColor Cyan
+          Write-Host ""
+          Write-Host "Summary: $errorCount error(s), $warningCount warning(s)" -ForegroundColor Yellow
+        } else {
+          Write-Host "No code analysis issues found." -ForegroundColor Green
+        }
+        Write-Host ""
+        Write-Host "Note: For .NET Framework projects, compiler warnings serve as code analysis." -ForegroundColor Gray
+      continue-on-error: true
+      
+

@@ -68,6 +68,62 @@ namespace TEM.CI.PoC.Tests
 			// Assert
 			Assert.AreEqual(-7, result);
 		}
+
+		[TestMethod]
+		public void Multiply_WhenGivenTwoNumbers_ReturnsProduct()
+		{
+			// Arrange
+			int a = 6;
+			int b = 7;
+
+			// Act
+			int result = _calculator.Multiply(a, b);
+
+			// Assert
+			Assert.AreEqual(42, result);
+		}
+
+		[TestMethod]
+		public void Multiply_WhenGivenZero_ReturnsZero()
+		{
+			// Arrange
+			int a = 5;
+			int b = 0;
+
+			// Act
+			int result = _calculator.Multiply(a, b);
+
+			// Assert
+			Assert.AreEqual(0, result);
+		}
+
+		[TestMethod]
+		public void Multiply_WhenGivenNegativeNumbers_ReturnsPositive()
+		{
+			// Arrange
+			int a = -4;
+			int b = -3;
+
+			// Act
+			int result = _calculator.Multiply(a, b);
+
+			// Assert
+			Assert.AreEqual(12, result);
+		}
+
+		[TestMethod]
+		public void Multiply_WhenOneNumberIsNegative_ReturnsNegative()
+		{
+			// Arrange
+			int a = 5;
+			int b = -3;
+
+			// Act
+			int result = _calculator.Multiply(a, b);
+
+			// Assert
+			Assert.AreEqual(-15, result);
+		}
 	}
 }
 

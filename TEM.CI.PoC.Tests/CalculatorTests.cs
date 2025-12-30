@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace TEM.CI.PoC.Tests
 {
@@ -123,6 +124,87 @@ namespace TEM.CI.PoC.Tests
 
 			// Assert
 			Assert.AreEqual(-15, result);
+		}
+
+		[TestMethod]
+		public void Divide_WhenGivenTwoNumbers_ReturnsQuotient()
+		{
+			// Arrange
+			int a = 15;
+			int b = 3;
+
+			// Act
+			int result = _calculator.Divide(a, b);
+
+			// Assert
+			Assert.AreEqual(5, result);
+		}
+
+		[TestMethod]
+		public void Divide_WhenResultIsNotWhole_ReturnsIntegerPart()
+		{
+			// Arrange
+			int a = 10;
+			int b = 3;
+
+			// Act
+			int result = _calculator.Divide(a, b);
+
+			// Assert
+			Assert.AreEqual(3, result); // Integer division truncates
+		}
+
+		[TestMethod]
+		public void Divide_WhenDivisorIsZero_ThrowsDivideByZeroException()
+		{
+			// Arrange
+			int a = 10;
+			int b = 0;
+
+			// Act & Assert
+			Assert.ThrowsException<DivideByZeroException>(() => _calculator.Divide(a, b));
+		}
+
+		[TestMethod]
+		public void Divide_WhenBothNumbersAreNegative_ReturnsPositive()
+		{
+			// Arrange
+			int a = -12;
+			int b = -3;
+
+			// Act
+			int result = _calculator.Divide(a, b);
+
+			// Assert
+			Assert.AreEqual(4, result);
+		}
+
+		[TestMethod]
+		public void Divide_WhenDividendIsNegative_ReturnsNegative()
+		{
+			// Arrange
+			int a = -15;
+			int b = 3;
+
+			// Act
+			int result = _calculator.Divide(a, b);
+
+			// Assert
+			Assert.AreEqual(-5, result);
+		}
+
+		[TestMethod]
+		public void Divide_WhenDivisorIsNegative_ReturnsNegative()
+		{
+			// Arrange
+			int a = 20;
+			int b = -4;
+
+			// Act
+			int result = _calculator.Divide(a, b);
+
+			// Assert
+			Assert.AreEqual(-5, result);
 		}
 	}
 }

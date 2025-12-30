@@ -37,6 +37,22 @@ namespace TEM.CI.PoC
 			return a * b;
 		}
 
+		/// <summary>
+		/// Divides first number by second number
+		/// </summary>
+		/// <param name="a">The dividend</param>
+		/// <param name="b">The divisor</param>
+		/// <returns>The result of the division</returns>
+		/// <exception cref="DivideByZeroException">Thrown when divisor is zero</exception>
+		public int Divide(int a, int b)
+		{
+			if (b == 0)
+			{
+				throw new DivideByZeroException("Cannot divide by zero");
+			}
+			return a / b;
+		}
+
 		// Unused parameter - will generate warning
 		public int GetValue(int unusedParameter)
 		{

@@ -40,6 +40,9 @@ namespace TEM.CI.PoC
 		/// <summary>
 		/// Divides first number by second number
 		/// </summary>
+		/// <param name="a">The dividend</param>
+		/// <param name="b">The divisor</param>
+		/// <returns>The result of the division</returns>
 		/// <exception cref="DivideByZeroException">Thrown when divisor is zero</exception>
 		public int Divide(int a, int b)
 		{

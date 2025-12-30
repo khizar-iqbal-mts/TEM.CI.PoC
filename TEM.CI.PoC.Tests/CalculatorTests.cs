@@ -164,6 +164,48 @@ namespace TEM.CI.PoC.Tests
 			// Act & Assert
 			Assert.ThrowsException<DivideByZeroException>(() => _calculator.Divide(a, b));
 		}
+
+		[TestMethod]
+		public void Divide_WhenBothNumbersAreNegative_ReturnsPositive()
+		{
+			// Arrange
+			int a = -12;
+			int b = -3;
+
+			// Act
+			int result = _calculator.Divide(a, b);
+
+			// Assert
+			Assert.AreEqual(4, result);
+		}
+
+		[TestMethod]
+		public void Divide_WhenDividendIsNegative_ReturnsNegative()
+		{
+			// Arrange
+			int a = -15;
+			int b = 3;
+
+			// Act
+			int result = _calculator.Divide(a, b);
+
+			// Assert
+			Assert.AreEqual(-5, result);
+		}
+
+		[TestMethod]
+		public void Divide_WhenDivisorIsNegative_ReturnsNegative()
+		{
+			// Arrange
+			int a = 20;
+			int b = -4;
+
+			// Act
+			int result = _calculator.Divide(a, b);
+
+			// Assert
+			Assert.AreEqual(-5, result);
+		}
 	}
 }
 

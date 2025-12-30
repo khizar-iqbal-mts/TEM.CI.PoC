@@ -37,6 +37,14 @@ namespace TEM.CI.PoC
 			return a * b;
 		}
 
+		/// <summary>
+		/// Divides first number by second number
+		/// </summary>
+		public int Divide(int a, int b)
+		{
+			return a / b;
+		}
+
 		// Unused parameter - will generate warning
 		public int GetValue(int unusedParameter)
 		{

@@ -40,8 +40,13 @@ namespace TEM.CI.PoC
 		/// <summary>
 		/// Divides first number by second number
 		/// </summary>
+		/// <exception cref="DivideByZeroException">Thrown when divisor is zero</exception>
 		public int Divide(int a, int b)
 		{
+			if (b == 0)
+			{
+				throw new DivideByZeroException("Cannot divide by zero");
+			}
 			return a / b;
 		}
 

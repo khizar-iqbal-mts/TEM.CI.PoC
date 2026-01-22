@@ -206,6 +206,20 @@ namespace TEM.CI.PoC.Tests
 			// Assert
 			Assert.AreEqual(-5, result);
 		}
+	
+		[TestMethod]
+		public void Modulo_WhenGivenTwoNumbers_ReturnsRemainder()
+		{
+			// Arrange
+			int a = 10;
+			int b = 3;
+
+			// Act
+			int result = _calculator.Modulo(a, b);
+
+			// Assert
+			Assert.AreEqual(1, result);
+		}
 	}
 }
 

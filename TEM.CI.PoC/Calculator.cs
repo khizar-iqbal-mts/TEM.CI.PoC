@@ -53,6 +53,17 @@ namespace TEM.CI.PoC
 			return a / b;
 		}
 
+		/// <summary>
+		/// Returns the remainder of the division of two numbers
+		/// </summary>
+		/// <param name="a">The dividend</param>
+		/// <param name="b">The divisor</param>
+		/// <returns>The remainder of the division</returns>
+		public int Modulo(int a, int b)
+		{
+			return a % b;
+		}
+
 		// Unused parameter - will generate warning
 		public int GetValue(int unusedParameter)
 		{

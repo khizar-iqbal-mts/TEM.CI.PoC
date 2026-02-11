@@ -206,7 +206,7 @@ namespace TEM.CI.PoC.Tests
 			// Assert
 			Assert.AreEqual(-5, result);
 		}
-	
+
 		[TestMethod]
 		public void Modulo_WhenGivenTwoNumbers_ReturnsRemainder()
 		{
@@ -219,6 +219,29 @@ namespace TEM.CI.PoC.Tests
 
 			// Assert
 			Assert.AreEqual(1, result);
+		}
+
+		// add Cube tests here
+		[TestMethod]
+		public void Cube_WhenGivenNumber_ReturnsCubedValue()
+		{
+			// Arrange
+			int a = 3;
+			// Act
+			int result = _calculator.Cube(a);
+			// Assert
+			Assert.AreEqual(27, result);
+		}
+
+		[TestMethod]
+		public void Cube_WhenGivenNegativeNumber_ReturnsNegativeCubedValue()
+		{
+			// Arrange
+			int a = -2;
+			// Act
+			int result = _calculator.Cube(a);
+			// Assert
+			Assert.AreEqual(-8, result);
 		}
 	}
 }

@@ -76,6 +76,29 @@ namespace TEM.CI.PoC
 			return a * a;
 		}
 
+		public int Cube(int a)
+		{
+			return a * a * a;
+		}
+
+		public int Factorial(int a)
+		{
+			if (a == 0)
+			{
+				return 1;
+			}
+			return a * Factorial(a - 1);
+		}
+
+		public int Fibonacci(int a)
+		{
+			if (a <= 1)
+			{
+				return a;
+			}
+			return Fibonacci(a - 1) + Fibonacci(a - 2);
+		}
+
 		// Unused parameter - will generate warning
 		public int GetValue(int unusedParameter)
 		{

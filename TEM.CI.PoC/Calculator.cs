@@ -66,6 +66,16 @@ namespace TEM.CI.PoC
 			return a % b;
 		}
 
+		public int Power(int a, int b)
+		{
+			return (int)Math.Pow(a, b);
+		}
+
+		public int Square(int a)
+		{
+			return a * a;
+		}
+
 		// Unused parameter - will generate warning
 		public int GetValue(int unusedParameter)
 		{

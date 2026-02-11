@@ -48,6 +48,7 @@ namespace TEM.CI.PoC
 		{
 			if (b == 0)
 			{
+				// this will be caught by the test
 				throw new DivideByZeroException("Cannot divide by zero");
 			}
 			return a / b;
@@ -61,6 +62,7 @@ namespace TEM.CI.PoC
 		/// <returns>The remainder of the division</returns>
 		public int Modulo(int a, int b)
 		{
+			// this will return a runtime error
 			return a % b;
 		}
 
@@ -73,6 +75,7 @@ namespace TEM.CI.PoC
 		// Method with potential null reference - will generate warning
 		public string FormatResult(int value)
 		{
+			string valueA = "0";
 			string result = null;
 			// Potential null reference warning
 			return result.ToUpper();
